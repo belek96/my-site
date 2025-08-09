@@ -254,6 +254,23 @@ function showAddressForm() {
       e.target.value = val;
     });
   }
+
+  // Добавляем автоматическую подстановку двоеточия в поле времени доставки
+  const timeInput = document.getElementById('delivery-time');
+  if (timeInput) {
+    timeInput.addEventListener('input', (e) => {
+      let v = e.target.value.replace(/[^0-9:]/g, '');
+      if (v.length > 2 && v.indexOf(':') === -1) {
+        v = v.slice(0, 2) + ':' + v.slice(2);
+      } else if (v.length === 2 && !v.includes(':')) {
+        v += ':';
+      }
+      if (v.length > 5) {
+        v = v.slice(0, 5);
+      }
+      e.target.value = v;
+    });
+  }
 }
 
 function openOrderModal() {
