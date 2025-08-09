@@ -7,23 +7,26 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="top-bar">
-    <div class="container">
-      <div class="logo">Суши Магазин</div>
-      <div class="contact-info">
-        <span class="phone">+99670860011</span>
-        <a href="https://wa.me/99670860011" target="_blank" class="whatsapp-link">WhatsApp</a>
-        <a href="#" class="login-btn">Войти</a>
-      </div>
-    </div>
+  <header class="site-header">
+    <!-- Основной заголовок сайта -->
+    <h1 class="site-title">Суши Магазин</h1>
+    <!-- Главное меню: равномерное распределение пунктов по ширине -->
     <nav class="main-nav">
-      <ul class="container">
+      <ul>
         <li><a href="#combos">Комбо</a></li>
         <li><a href="#pizzas">Пиццы</a></li>
         <li><a href="#rolls">Роллы</a></li>
+        <li><a href="#baskets">Баскеты</a></li>
         <li><a href="#drinks">Напитки</a></li>
       </ul>
     </nav>
+    <!-- Контактная информация и ссылки на авторизацию/регистрацию -->
+    <div class="contact-info">
+      <span class="phone"><a href="tel:+996708260011">+996708260011</a></span>
+      <a href="https://wa.me/996708260011" target="_blank" class="whatsapp-link">WhatsApp</a>
+      <a href="login.html" class="login-btn">Войти</a>
+      <a href="register.html" class="register-btn">Регистрация</a>
+    </div>
   </header>
 
   <section class="hero">
@@ -39,19 +42,19 @@
       <h2>Комбо</h2>
       <div class="product-grid">
         <div class="product-card">
-          <img src="combo-placeholder.png" alt="Комбо 1">
-          <h3>Комбо 1</h3>
-          <p>Описание комбо 1.</p>
+          <img src="combo-placeholder.png" alt="Комбо хит сезона">
+          <h3>Комбо хит сезона</h3>
+          <p>Описание комбо хит сезона.</p>
         </div>
         <div class="product-card">
-          <img src="combo-placeholder.png" alt="Комбо 2">
-          <h3>Комбо 2</h3>
-          <p>Описание комбо 2.</p>
+          <img src="combo-placeholder.png" alt="Комбо классика">
+          <h3>Комбо классика</h3>
+          <p>Описание комбо классика.</p>
         </div>
         <div class="product-card">
-          <img src="combo-placeholder.png" alt="Комбо 3">
-          <h3>Комбо 3</h3>
-          <p>Описание комбо 3.</p>
+          <img src="combo-placeholder.png" alt="Комбо премиум">
+          <h3>Комбо премиум</h3>
+          <p>Описание комбо премиум.</p>
         </div>
       </div>
     </section>
@@ -138,6 +141,28 @@
       </div>
     </section>
 
+    <!-- Баскеты: новые позиции L/M/XL -->
+    <section id="baskets" class="menu-section">
+      <h2>Баскеты</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="basket-placeholder.png" alt="Баскет L">
+          <h3>Баскет L</h3>
+          <p>Описание баскета L.</p>
+        </div>
+        <div class="product-card">
+          <img src="basket-placeholder.png" alt="Баскет M">
+          <h3>Баскет M</h3>
+          <p>Описание баскета M.</p>
+        </div>
+        <div class="product-card">
+          <img src="basket-placeholder.png" alt="Баскет XL">
+          <h3>Баскет XL</h3>
+          <p>Описание баскета XL.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Gift section removed -->
 
     <section id="drinks" class="menu-section">
@@ -166,8 +191,8 @@
 
     <section id="contact" class="contact-section">
       <h2>Контакты</h2>
-      <p>Телефон: <a href="tel:+99670860011">+99670860011</a></p>
-      <p>WhatsApp: <a href="https://wa.me/99670860011" target="_blank">Написать нам</a></p>
+      <p>Телефон: <a href="tel:+996708260011">+996708260011</a></p>
+      <p>WhatsApp: <a href="https://wa.me/996708260011" target="_blank">Написать нам</a></p>
     </section>
 
     <!-- Call-to-action for leaving a review -->

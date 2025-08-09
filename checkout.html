@@ -47,6 +47,7 @@
         <select id="order-payment" required>
           <option value="cash">Наличными</option>
           <option value="card">Картой</option>
+          <option value="qr">QR перевод</option>
         </select>
       </label><br>
       <label>Доставка:<br>
@@ -58,6 +59,11 @@
       <label id="delivery-time-label" style="display:none;">Время доставки (чч:мм):<br>
         <input type="text" id="delivery-time" pattern="([01]\\d|2[0-3]):[0-5]\\d" placeholder="чч:мм" title="Введите время в 24‑часовом формате чч:мм">
       </label><br>
+      <!-- QR-код для оплаты. Показывается при выборе оплаты через QR -->
+      <div id="qr-code-section" style="display:none;text-align:center;margin:10px 0;">
+        <img src="qr-placeholder.png" alt="QR Code" style="max-width:200px;">
+        <p>Отсканируйте QR‑код для оплаты.</p>
+      </div>
       <!-- Карта для выбора местоположения -->
       <label>Выберите точку на карте:<br></label>
       <div id="map" style="height:300px;border:1px solid #cccccc;border-radius:8px;margin-bottom:10px;"></div>

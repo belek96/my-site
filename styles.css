@@ -44,7 +44,7 @@ body {
 .main-nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  justify-content: space-around;
   padding: 10px 0;
   margin: 0;
 }
@@ -208,6 +208,62 @@ body {
 }
 .review-btn:hover {
   background: #a50023;
+}
+
+/* ===== Стили для новой шапки ===== */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+}
+/* Заголовок сайта выравнивается по центру с отступами сверху и снизу */
+.site-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #d2002d;
+  margin: 10px 0;
+}
+/* Главное меню распределяет пункты равномерно по ширине */
+.site-header .main-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+.site-header .main-nav a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+.site-header .main-nav a:hover {
+  color: #d2002d;
+}
+/* Контактная строка в шапке */
+.contact-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+/* Кнопка регистрации похожа на кнопку входа */
+.register-btn {
+  color: #d2002d;
+  text-decoration: none;
+  border: 1px solid #d2002d;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.register-btn:hover {
+  background: #d2002d;
+  color: #ffffff;
+}
+/* Плавное перемещение маркера на карте */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease;
 }
 
 /* WhatsApp link styling */

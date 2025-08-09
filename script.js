@@ -1,6 +1,43 @@
 // Update the footer year automatically
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Применяем настройки администратора, если они сохранены в localStorage.
+// Это позволяет владельцу сайта менять телефон, WhatsApp и названия комбо без изменения кода.
+try {
+  const settings = JSON.parse(localStorage.getItem('adminSettings')) || {};
+  // Обновляем телефон и ссылки WhatsApp в шапке и в секции контактов
+  if (settings.phone) {
+    document.querySelectorAll('.contact-info .phone a').forEach(el => {
+      el.href = 'tel:' + settings.phone;
+      el.textContent = settings.phone;
+    });
+    document.querySelectorAll('#contact a[href^="tel:"]').forEach(el => {
+      el.href = 'tel:' + settings.phone;
+      el.textContent = settings.phone;
+    });
+  }
+  if (settings.whatsapp) {
+    const whatsappNum = settings.whatsapp.replace(/\D/g, '');
+    document.querySelectorAll('.contact-info .whatsapp-link').forEach(el => {
+      el.href = 'https://wa.me/' + whatsappNum;
+    });
+    document.querySelectorAll('#contact a[href^="https://wa.me"]').forEach(el => {
+      el.href = 'https://wa.me/' + whatsappNum;
+    });
+  }
+  // Обновляем названия комбо, если администратор их изменил
+  if (Array.isArray(settings.comboNames)) {
+    const comboTitles = document.querySelectorAll('#combos .product-card h3');
+    settings.comboNames.forEach((name, idx) => {
+      if (name && comboTitles[idx]) {
+        comboTitles[idx].textContent = name;
+      }
+    });
+  }
+} catch (e) {
+  console.warn('Could not apply admin settings', e);
+}
+
 // Cart functionality
 // A simple object to keep track of items and their quantities
 let cart = {};
@@ -205,6 +242,18 @@ function showAddressForm() {
     // Auto-close modal after a short delay
     setTimeout(closeModal, 3000);
   });
+
+  // Добавляем автоматическую подстановку точек в поле возраста
+  const ageInput = document.getElementById('order-age');
+  if (ageInput) {
+    ageInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^0-9.]/g, '');
+      if ((val.length === 2 || val.length === 5) && !val.endsWith('.')) {
+        val += '.';
+      }
+      e.target.value = val;
+    });
+  }
 }
 
 function openOrderModal() {

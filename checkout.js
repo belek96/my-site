@@ -96,6 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
       timeLabel.style.display = 'none';
     }
   });
+
+  // Show or hide QR-code section based on payment method
+  const paymentSelect = document.getElementById('order-payment');
+  const qrSection = document.getElementById('qr-code-section');
+  if (paymentSelect && qrSection) {
+    // initialize display based on current selection
+    if (paymentSelect.value === 'qr') {
+      qrSection.style.display = 'block';
+    }
+    paymentSelect.addEventListener('change', () => {
+      if (paymentSelect.value === 'qr') {
+        qrSection.style.display = 'block';
+      } else {
+        qrSection.style.display = 'none';
+      }
+    });
+  }
+
+  // Automatically insert dots in age field as user types (dd.mm.yyyy)
+  const ageInput = document.getElementById('order-age');
+  if (ageInput) {
+    ageInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^0-9.]/g, '');
+      // Insert dots after 2 and 5 characters
+      if ((val.length === 2 || val.length === 5) && !val.endsWith('.')) {
+        val += '.';
+      }
+      e.target.value = val;
+    });
+  }
   // Handle form submission
   const form = document.getElementById('checkout-form');
   form.addEventListener('submit', (e) => {
@@ -130,6 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     // If delivery is scheduled, validate time field pattern (already validated by pattern attr)
+    // Сохраняем заказ в localStorage для просмотра в админ‑панели
+    try {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.push({ items: cartData, createdAt: new Date().toISOString() });
+      localStorage.setItem('orders', JSON.stringify(orders));
+    } catch (err) {
+      console.warn('Could not save order history', err);
+    }
     // Show success message and clear cart
     const messageDiv = document.getElementById('checkout-message');
     messageDiv.innerHTML = '<p>Спасибо за заказ! Мы свяжемся с вами по указанному телефону.</p>';
