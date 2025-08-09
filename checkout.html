@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оформление заказа - Суши Магазин</title>
+  <!-- Стили сайта -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Leaflet CSS for interactive map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <header class="top-bar" style="background:#f8f8f8;padding:12px 16px;border-bottom:1px solid #eeeeee;">
+    <a href="index.html" style="text-decoration:none;color:#d2002d;font-weight:bold;">&larr; Назад</a>
+    <h1 style="display:inline-block;margin-left:16px;font-size:20px;color:#d2002d;">Оформление заказа</h1>
+  </header>
+  <main class="container" style="max-width:700px;margin:20px auto;">
+    <h2 style="color:#d2002d;">Заполните данные для доставки</h2>
+    <!-- Список товаров из корзины -->
+    <ul id="cart-summary" style="list-style:none;padding-left:0;margin-bottom:20px;"></ul>
+    <form id="checkout-form">
+      <label>Возраст (дд.мм.гггг):<br>
+        <input type="text" id="order-age" required placeholder="дд.мм.гггг" pattern="\d{2}\.\d{2}\.\d{4}" title="Введите дату в формате дд.мм.гггг">
+      </label><br>
+      <label>Улица:<br>
+        <input type="text" id="order-street" required>
+      </label><br>
+      <label>Дом:<br>
+        <input type="text" id="order-house" required>
+      </label><br>
+      <label>Квартира:<br>
+        <input type="text" id="order-flat">
+      </label><br>
+      <label>Домофон:<br>
+        <input type="text" id="order-intercom">
+      </label><br>
+      <label>Количество персон:<br>
+        <input type="number" id="order-people" min="1" max="20" value="1" required>
+      </label><br>
+      <label>Комментарий к заказу:<br>
+        <textarea id="order-comment" rows="3" maxlength="200" placeholder="Комментарий (до 200 символов)"></textarea>
+      </label><br>
+      <label>Телефон:<br>
+        <input type="tel" id="order-phone" required pattern="[\+\d\s\-()]{8,}" title="Введите корректный номер телефона">
+      </label><br>
+      <label>Способ оплаты:<br>
+        <select id="order-payment" required>
+          <option value="cash">Наличными</option>
+          <option value="card">Картой</option>
+        </select>
+      </label><br>
+      <label>Доставка:<br>
+        <select id="delivery-choice" required>
+          <option value="asap">Как можно скорее</option>
+          <option value="schedule">Ко времени</option>
+        </select>
+      </label><br>
+      <label id="delivery-time-label" style="display:none;">Время доставки (чч:мм):<br>
+        <input type="text" id="delivery-time" pattern="([01]\\d|2[0-3]):[0-5]\\d" placeholder="чч:мм" title="Введите время в 24‑часовом формате чч:мм">
+      </label><br>
+      <!-- Карта для выбора местоположения -->
+      <label>Выберите точку на карте:<br></label>
+      <div id="map" style="height:300px;border:1px solid #cccccc;border-radius:8px;margin-bottom:10px;"></div>
+      <!-- Скрытые поля для координат -->
+      <input type="hidden" id="latitude" name="latitude">
+      <input type="hidden" id="longitude" name="longitude">
+      <button type="submit" class="modal-btn" style="width:100%;margin-top:12px;">Подтвердить заказ</button>
+    </form>
+    <div id="checkout-message" style="display:none;margin-top:20px;color:#d2002d;font-weight:bold;"></div>
+  </main>
+  <!-- Подключаем Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>
