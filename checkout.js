@@ -35,10 +35,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const lonInput = document.getElementById('longitude');
   latInput.value = bishkekLat;
   lonInput.value = bishkekLng;
+  // References to street and house inputs for auto-fill
+  const streetInput = document.getElementById('order-street');
+  const houseInput = document.getElementById('order-house');
+
+  /**
+   * Reverse geocode coordinates to fill street and house fields.
+   * Uses OpenStreetMap Nominatim API to find nearest address.
+   * @param {number} lat
+   * @param {number} lng
+   */
+  function reverseGeocode(lat, lng) {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=ru`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const addr = data.address || {};
+        // Fill the street and house number if available
+        if (addr.road) {
+          streetInput.value = addr.road;
+        }
+        if (addr.house_number) {
+          houseInput.value = addr.house_number;
+        }
+      })
+      .catch((err) => {
+        console.warn('Reverse geocoding failed', err);
+      });
+  }
+
+  /**
+   * Update hidden lat/lon inputs and trigger reverse geocoding.
+   * @param {L.LatLng} latlng
+   */
+  function updateLatLon(latlng) {
+    latInput.value = latlng.lat.toFixed(6);
+    lonInput.value = latlng.lng.toFixed(6);
+    // Trigger reverse geocoding to auto-fill address fields
+    reverseGeocode(latlng.lat, latlng.lng);
+  }
+
+  // When user clicks on map, reposition marker and update coordinates
   map.on('click', (e) => {
     marker.setLatLng(e.latlng);
-    latInput.value = e.latlng.lat.toFixed(6);
-    lonInput.value = e.latlng.lng.toFixed(6);
+    updateLatLon(e.latlng);
+  });
+  // Also update marker and coordinates when user pans/scrolls the map (moveend fires after pan and zoom)
+  map.on('moveend', () => {
+    const center = map.getCenter();
+    marker.setLatLng(center);
+    updateLatLon(center);
   });
   // Toggle time input based on delivery choice
   const deliverySelect = document.getElementById('delivery-choice');
