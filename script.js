@@ -107,7 +107,7 @@ function showAddressForm() {
     <h3>Данные для доставки</h3>
     <form id="order-form">
       <label>Возраст (дд.мм.гггг):<br>
-        <input type="text" id="order-age" required placeholder="дд.мм.гггг" pattern="\\d{2}\\.\\d{2}\\.\\d{4}">
+        <input type="text" id="order-age" required placeholder="дд.мм.гггг" pattern="\\d{2}\\.\\d{2}\\.\\d{4}" title="Введите дату в формате дд.мм.гггг">
       </label><br>
       <label>Улица:<br>
         <input type="text" id="order-street" required>
@@ -125,22 +125,22 @@ function showAddressForm() {
         <input type="url" id="order-maplink" placeholder="https://maps.google.com/...">
       </label><br>
       <label>Количество персон:<br>
-        <input type="number" id="order-people" min="1" value="1">
+        <input type="number" id="order-people" min="1" max="20" value="1" required>
       </label><br>
       <label>Комментарий к заказу:<br>
-        <textarea id="order-comment" rows="2"></textarea>
+        <textarea id="order-comment" rows="2" maxlength="200" placeholder="Комментарий (до 200 символов)"></textarea>
       </label><br>
       <label>Телефон:<br>
-        <input type="tel" id="order-phone" required>
+        <input type="tel" id="order-phone" required pattern="[\+\d\s\-()]{8,}" title="Введите корректный номер телефона">
       </label><br>
       <label>Способ оплаты:<br>
-        <select id="order-payment">
+        <select id="order-payment" required>
           <option value="cash">Наличными</option>
           <option value="card">Картой</option>
         </select>
       </label><br>
       <label>Доставка:<br>
-        <select id="delivery-choice">
+        <select id="delivery-choice" required>
           <option value="asap">Как можно скорее</option>
           <option value="schedule">Ко времени</option>
         </select>
@@ -164,9 +164,39 @@ function showAddressForm() {
     }
   });
   // Handle form submission
-  document.getElementById('order-form').addEventListener('submit', (e) => {
+  const form = document.getElementById('order-form');
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Here you would send order details to server or process them
+    // Built-in validation
+    if (!form.reportValidity()) {
+      return;
+    }
+    // Validate age: ensure date is valid and user is at least 16 years old
+    const ageStr = document.getElementById('order-age').value.trim();
+    const ageParts = ageStr.split('.');
+    let validAge = false;
+    if (ageParts.length === 3) {
+      const day = parseInt(ageParts[0], 10);
+      const month = parseInt(ageParts[1], 10) - 1; // JavaScript months 0-11
+      const year = parseInt(ageParts[2], 10);
+      const birthDate = new Date(year, month, day);
+      if (!isNaN(birthDate)) {
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        if (age >= 16) {
+          validAge = true;
+        }
+      }
+    }
+    if (!validAge) {
+      alert('Пожалуйста, укажите корректную дату рождения. Вам должно быть не менее 16 лет.');
+      return;
+    }
+    // Additional validation could go here (e.g., custom checks)
     orderModalContent.innerHTML = '<h3>Спасибо за заказ!</h3><p>Мы свяжемся с вами по указанному телефону.</p>';
     // Clear the cart after ordering
     cart = {};
