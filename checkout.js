@@ -126,6 +126,27 @@ document.addEventListener('DOMContentLoaded', () => {
       e.target.value = val;
     });
   }
+
+  // Automatically insert a colon in the delivery time field (hh:mm)
+  const timeInput = document.getElementById('delivery-time');
+  if (timeInput) {
+    timeInput.addEventListener('input', (e) => {
+      let v = e.target.value.replace(/[^0-9:]/g, '');
+      // If there is no colon yet and two or more digits have been entered,
+      // insert a colon after the first two characters. This supports both
+      // progressive typing (e.g. 1 → 12 → 12:) and paste operations.
+      if (v.length > 2 && v.indexOf(':') === -1) {
+        v = v.slice(0, 2) + ':' + v.slice(2);
+      } else if (v.length === 2 && !v.includes(':')) {
+        v += ':';
+      }
+      // Limit to 5 characters (hh:mm)
+      if (v.length > 5) {
+        v = v.slice(0, 5);
+      }
+      e.target.value = v;
+    });
+  }
   // Handle form submission
   const form = document.getElementById('checkout-form');
   form.addEventListener('submit', (e) => {
