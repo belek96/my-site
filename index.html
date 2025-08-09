@@ -2,115 +2,177 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Суши Магазин</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <h1 class="logo">Суши Магазин</h1>
-      <nav class="nav">
-        <a href="#combos">Комбо</a>
-        <a href="#pizzas">Пицца</a>
-        <a href="#rolls">Роллы</a>
-        <a href="#gift">Подарок</a>
-        <a href="#contact">Контакты</a>
-      </nav>
+  <header class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="logo">Суши Магазин</div>
+      <div class="contact">+996 (000) 00 00 00</div>
+      <a href="#" class="login-btn">Войти</a>
     </div>
   </header>
-
+  <nav class="main-nav">
+    <div class="container nav-inner">
+      <a href="#combos">Комбо</a>
+      <a href="#pizzas">Пиццы</a>
+      <a href="#rolls">Роллы</a>
+      <a href="#gift">Подарок</a>
+      <a href="#contact">Контакты</a>
+    </div>
+  </nav>
   <section class="hero">
-    <div class="container hero-inner">
-      <h2>Лучшие суши и пицца в одном месте</h2>
-      <p>Выбирайте из наших фирменных комбо, пицц и роллов. Закажите сейчас — и получите курицу в кляре в подарок!</p>
-      <a href="#combos" class="btn cta">Смотреть меню</a>
+    <img src="https://via.placeholder.com/1600x600.png?text=Hero+Banner" alt="Hero banner" class="hero-img">
+    <div class="hero-text">
+      <h1>Лучшие суши и пицца в одном месте</h1>
+      <p>Свежие продукты, быстрый заказ и выгодные цены</p>
     </div>
   </section>
-
-  <main class="container">
-            
-    <section id="combos" class="menu-section">
-              <img src="fadya-azhary-5KS7T3Gs3CA-unsplash.jpg" alt="Комбо" class="section-img" />
-      <h2>Комбо</h2>
-      <div class="menu-grid">
-        <div class="card">
-          <h3>Комбо «Классическое»</h3>
-          <p>Суши, роллы и напиток</p>
+  <section class="categories">
+    <div class="container category-grid">
+      <a href="#combos" class="category-item">
+        <img src="https://via.placeholder.com/200x150.png?text=Комбо" alt="Комбо">
+        <span>Комбо</span>
+      </a>
+      <a href="#pizzas" class="category-item">
+        <img src="https://via.placeholder.com/200x150.png?text=Пиццы" alt="Пиццы">
+        <span>Пиццы</span>
+      </a>
+      <a href="#rolls" class="category-item">
+        <img src="https://via.placeholder.com/200x150.png?text=Роллы" alt="Роллы">
+        <span>Роллы</span>
+      </a>
+      <a href="#gift" class="category-item">
+        <img src="https://via.placeholder.com/200x150.png?text=Подарок" alt="Подарок">
+        <span>Подарок</span>
+      </a>
+    </div>
+  </section>
+  <div class="container content-with-cart">
+    <main class="main-content">
+      <section id="combos" class="menu-section">
+        <h2>Комбо</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Комбо+1" alt="Комбо 1">
+            <h3>Комбо №1</h3>
+            <p>Описание комбо 1.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Комбо+2" alt="Комбо 2">
+            <h3>Комбо №2</h3>
+            <p>Описание комбо 2.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Комбо+3" alt="Комбо 3">
+            <h3>Комбо №3</h3>
+            <p>Описание комбо 3.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Комбо «Семейное»</h3>
-          <p>Пицца, роллы и суп мисо</p>
+      </section>
+      <section id="pizzas" class="menu-section">
+        <h2>Пиццы</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Пицца+1" alt="Пицца 1">
+            <h3>Пицца №1</h3>
+            <p>Описание пиццы 1.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Пицца+2" alt="Пицца 2">
+            <h3>Пицца №2</h3>
+            <p>Описание пиццы 2.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Пицца+3" alt="Пицца 3">
+            <h3>Пицца №3</h3>
+            <p>Описание пиццы 3.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Комбо «Праздничное»</h3>
-          <p>Большой сет роллов и десерт</p>
+      </section>
+      <section id="rolls" class="menu-section">
+        <h2>Роллы</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+1" alt="Ролл 1">
+            <h3>Ролл №1</h3>
+            <p>Описание ролла 1.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+2" alt="Ролл 2">
+            <h3>Ролл №2</h3>
+            <p>Описание ролла 2.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+3" alt="Ролл 3">
+            <h3>Ролл №3</h3>
+            <p>Описание ролла 3.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+4" alt="Ролл 4">
+            <h3>Ролл №4</h3>
+            <p>Описание ролла 4.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+5" alt="Ролл 5">
+            <h3>Ролл №5</h3>
+            <p>Описание ролла 5.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+6" alt="Ролл 6">
+            <h3>Ролл №6</h3>
+            <p>Описание ролла 6.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+7" alt="Ролл 7">
+            <h3>Ролл №7</h3>
+            <p>Описание ролла 7.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+8" alt="Ролл 8">
+            <h3>Ролл №8</h3>
+            <p>Описание ролла 8.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+9" alt="Ролл 9">
+            <h3>Ролл №9</h3>
+            <p>Описание ролла 9.</p>
+          </div>
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Ролл+10" alt="Ролл 10">
+            <h3>Ролл №10</h3>
+            <p>Описание ролла 10.</p>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="pizzas" class="menu-section">
-      <h2>Пицца</h2>
-              <img src="ivan-torres-MQUqbmszGGM-unsplash.jpg" alt="Пицца" class="section-img" />
-      <div class="menu-grid">
-
-        <div class="card">
-          <h3>Пицца «Маргарита»</h3>
-          <p>Нежный сыр, томаты, базилик</p>
+      </section>
+      <section id="gift" class="menu-section">
+        <h2>Подарок</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200.png?text=Курица+в+кляре" alt="Курица в кляре">
+            <h3>Курица в кляре</h3>
+            <p>Получите бесплатно при заказе комбо</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Пицца «Терияки»</h3>
-          <p>Курица, соус терияки, кунжут</p>
-        </div>
-        <div class="card">
-          <h3>Пицца «Морская»</h3>
-          <p>Лосось, креветки, сливочный соус</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="rolls" class="menu-section">
-
-              <img src="cath-smith-U3FD3M8mCC0-unsplash.jpg" alt="Роллы" class="section-img" />
-      
-      <h2>Роллы</h2>
-      <div class="menu-grid">
-        <div class="card"><h3>Филадельфия</h3><p>Лосось, крем‑сыр, авокадо</p></div>
-        <div class="card"><h3>Калифорния</h3><p>Краб, огурец, авокадо</p></div>
-        <div class="card"><h3>Спайси тунец</h3><p>Тунец, острый соус</p></div>
-        <div class="card"><h3>Унаги</h3><p>Угорь, огурец, соус унаги</p></div>
-        <div class="card"><h3>Веган</h3><p>Авокадо, огурец, манго</p></div>
-        <div class="card"><h3>Сяке маки</h3><p>Лосось, рис, нори</p></div>
-        <div class="card"><h3>Текка маки</h3><p>Тунец, рис, нори</p></div>
-        <div class="card"><h3>Дракон</h3><p>Креветка, угорь, авокадо</p></div>
-        <div class="card"><h3>Темпура</h3><p>Жареный ролл с креветкой</p></div>
-        <div class="card"><h3>Окинава</h3><p>Лосось, креветка, сливочный соус</p></div>
-      </div>
-    </section>
-
-    <section id="gift" class="menu-section gift-section">
-          <img src="lucas-andrade-3Uj0GwVmOeY-unsplash.jpg" alt="Курица в кляре" class="section-img" />
-      <h2>Подарок</h2>
-      <p>При заказе любого комбо вы получаете курицу в кляре <strong>в подарок</strong>!</p>
-    </section>
-
-    <section id="contact" class="menu-section contact-section">
-      <h2>Контакты</h2>
-      <p>Свяжитесь с нами для заказа или вопросов:</p>
-      <ul>
-        <li>Телефон: <a href="tel:+123456789">+1 234 567 89</a></li>
-        <li>Telegram: <a href="#">@sushi_shop</a></li>
-        <li>Email: <a href="mailto:info@sushi-shop.com">info@sushi-shop.com</a></li>
-      </ul>
-    </section>
-  </main>
-
+      </section>
+      <section id="contact" class="contact-section">
+        <h2>Контакты</h2>
+        <p>Телефон: +996 (000) 00 00 00</p>
+        <p>Адрес: Бишкек, ул. Пример 1</p>
+      </section>
+    </main>
+    <aside class="cart-summary">
+      <h3>Корзина</h3>
+      <p>Ваша корзина пуста</p>
+    </aside>
+  </div>
   <footer class="footer">
     <div class="container">
-      <span id="year"></span> © Суши Магазин. Все права защищены.
+      <p>© <span id="year"></span> Суши Магазин. Все права защищены.</p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
