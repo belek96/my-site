@@ -146,7 +146,8 @@ function showAddressForm() {
         </select>
       </label><br>
       <label id="delivery-time-label" style="display:none;">Время доставки:<br>
-        <input type="time" id="delivery-time">
+        <!-- Text input with 24‑hour format pattern (hh:mm) to avoid AM/PM -->
+        <input type="text" id="delivery-time" pattern="([01]\\d|2[0-3]):[0-5]\\d" placeholder="чч:мм" title="Введите время в 24‑часовом формате чч:мм">
       </label><br>
       <button type="submit" class="modal-btn">Подтвердить заказ</button>
     </form>
@@ -217,7 +218,18 @@ function openOrderModal() {
 }
 
 // Attach click handler to order button
-orderButton.addEventListener('click', openOrderModal);
+// Instead of opening a modal, redirect to a dedicated checkout page.
+orderButton.addEventListener('click', () => {
+  if (Object.keys(cart).length === 0) return;
+  // Persist cart in localStorage so the checkout page can read it
+  try {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  } catch (e) {
+    console.warn('Could not persist cart in localStorage', e);
+  }
+  // Redirect to checkout page
+  window.location.href = 'checkout.html';
+});
 
 // Initial render
 renderCart();
