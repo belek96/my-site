@@ -1,0 +1,145 @@
+:root {
+  --bg: #0f1226;
+  --card: #171a35;
+  --text: #e8ecff;
+  --muted: #b8c0ff;
+  --accent: #7c9cff;
+  --accent-2: #9ef0ff;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color .2s;
+}
+
+.nav a:hover {
+  background-color: rgba(255,255,255,.1);
+}
+
+.hero {
+  text-align: center;
+  padding: 48px 0 32px;
+}
+
+.hero-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero h2 {
+  margin-top: 12px;
+  font-size: 32px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  margin-top: 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.btn.cta {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f1226;
+  font-weight: 600;
+  border: none;
+}
+
+.menu-section {
+  margin-top: 40px;
+}
+
+.menu-section h2,
+.menu-section h3 {
+  margin-bottom: 12px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.card p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .nav {
+    justify-content: center;
+  }
+  .hero {
+    padding: 32px 0 20px;
+  }
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
