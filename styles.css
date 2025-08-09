@@ -262,3 +262,24 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
+
+/* Form styles inside the modal */
+.modal-content label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333333;
+}
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.modal-content textarea {
+  resize: vertical;
+}

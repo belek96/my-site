@@ -35,27 +35,24 @@ function renderCart() {
   emptyCartMessage.style.display = 'none';
   orderButton.disabled = false;
   // Create a list item for each product in the cart
-  entries.forEach(([title, qty]) => {
-    const li = document.createElement('li');
-    // product name
-    const nameSpan = document.createElement('span');
-    nameSpan.textContent = title;
-    // quantity
-    const qtySpan = document.createElement('span');
-    qtySpan.textContent = qty + '×';
-    // remove button
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'remove-item';
-    removeBtn.textContent = 'Удалить';
-    removeBtn.addEventListener('click', () => {
-      delete cart[title];
-      renderCart();
-    });
-    li.appendChild(nameSpan);
-    li.appendChild(qtySpan);
-    li.appendChild(removeBtn);
-    cartList.appendChild(li);
-  });
+      entries.forEach(([title, qty]) => {
+        const li = document.createElement('li');
+        // Combine product name and quantity into a single span for consistent layout
+        const nameQtySpan = document.createElement('span');
+        nameQtySpan.textContent = `${title} ×${qty}`;
+        nameQtySpan.className = 'cart-item-nameqty';
+        // remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-item';
+        removeBtn.textContent = 'Удалить';
+        removeBtn.addEventListener('click', () => {
+          delete cart[title];
+          renderCart();
+        });
+        li.appendChild(nameQtySpan);
+        li.appendChild(removeBtn);
+        cartList.appendChild(li);
+      });
 }
 
 // Attach add to cart buttons to each product card
@@ -104,30 +101,77 @@ function showAuthOptions() {
 }
 
 function showAddressForm() {
+  // Build a detailed form for guest or authenticated orders
   orderModalContent.innerHTML = `
     <button class="close-modal">×</button>
     <h3>Данные для доставки</h3>
     <form id="order-form">
-      <label>Адрес:<br><input type="text" id="order-address" required></label><br>
+      <label>Возраст (дд.мм.гггг):<br>
+        <input type="text" id="order-age" required placeholder="дд.мм.гггг" pattern="\\d{2}\\.\\d{2}\\.\\d{4}">
+      </label><br>
+      <label>Улица:<br>
+        <input type="text" id="order-street" required>
+      </label><br>
+      <label>Дом:<br>
+        <input type="text" id="order-house" required>
+      </label><br>
+      <label>Квартира:<br>
+        <input type="text" id="order-flat">
+      </label><br>
+      <label>Домофон:<br>
+        <input type="text" id="order-intercom">
+      </label><br>
+      <label>Ссылка на точную локацию (Google Maps):<br>
+        <input type="url" id="order-maplink" placeholder="https://maps.google.com/...">
+      </label><br>
+      <label>Количество персон:<br>
+        <input type="number" id="order-people" min="1" value="1">
+      </label><br>
+      <label>Комментарий к заказу:<br>
+        <textarea id="order-comment" rows="2"></textarea>
+      </label><br>
+      <label>Телефон:<br>
+        <input type="tel" id="order-phone" required>
+      </label><br>
       <label>Способ оплаты:<br>
         <select id="order-payment">
           <option value="cash">Наличными</option>
           <option value="card">Картой</option>
         </select>
       </label><br>
-      <label>Телефон:<br><input type="tel" id="order-phone" required></label><br>
+      <label>Доставка:<br>
+        <select id="delivery-choice">
+          <option value="asap">Как можно скорее</option>
+          <option value="schedule">Ко времени</option>
+        </select>
+      </label><br>
+      <label id="delivery-time-label" style="display:none;">Время доставки:<br>
+        <input type="time" id="delivery-time">
+      </label><br>
       <button type="submit" class="modal-btn">Подтвердить заказ</button>
     </form>
   `;
+  // Close modal when clicking on the X
   orderModalContent.querySelector('.close-modal').addEventListener('click', closeModal);
+  // Show or hide the time input based on delivery choice
+  const choiceSelect = document.getElementById('delivery-choice');
+  const timeLabel = document.getElementById('delivery-time-label');
+  choiceSelect.addEventListener('change', () => {
+    if (choiceSelect.value === 'schedule') {
+      timeLabel.style.display = 'block';
+    } else {
+      timeLabel.style.display = 'none';
+    }
+  });
+  // Handle form submission
   document.getElementById('order-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    // Here you would send order details to server
+    // Here you would send order details to server or process them
     orderModalContent.innerHTML = '<h3>Спасибо за заказ!</h3><p>Мы свяжемся с вами по указанному телефону.</p>';
-    // Clear cart
+    // Clear the cart after ordering
     cart = {};
     renderCart();
-    // Auto close after a delay
+    // Auto-close modal after a short delay
     setTimeout(closeModal, 3000);
   });
 }
