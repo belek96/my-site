@@ -240,6 +240,21 @@ body {
 .site-header .main-nav a:hover {
   color: #d2002d;
 }
+
+/*
+ * Adjust vertical spacing for the site title.  The owner requested that
+ * «Суши Магазин» be placed approximately one centimetre below the top of
+ * the page, and that the distance between the title and the menu be
+ * similar.  Using CSS centimeters here provides a consistent effect on
+ * both desktop and mobile browsers.
+ */
+.site-header {
+  padding-top: 1cm;
+}
+.site-title {
+  margin-bottom: 1cm;
+}
+
 /* Контактная строка в шапке */
 .contact-info {
   display: flex;
@@ -260,6 +275,43 @@ body {
 .register-btn:hover {
   background: #d2002d;
   color: #ffffff;
+}
+
+/*
+ * On very narrow screens the contact row should stack its items to avoid
+ * awkward wrapping.  This media query turns the contact-info into a
+ * column and left-aligns its contents when the viewport width is under
+ * 600 px.  It also removes horizontal gaps so that phone, WhatsApp and
+ * login/registration buttons line up neatly.
+ */
+@media (max-width: 600px) {
+  .contact-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/*
+ * Improve placeholder styling for date and time inputs used in the
+ * registration and checkout forms.  Placeholders use a light grey
+ * colour so that the automatically inserted dots and colons are more
+ * visible against user‑entered digits.
+ */
+input#order-age::placeholder,
+input#reg-dob::placeholder,
+input#delivery-time::placeholder {
+  color: #999999;
+}
+
+/*
+ * Smoother map marker animation.  When the Leaflet map recentres the
+ * marker on scroll or pan, animate both the transform and positional
+ * properties.  Without this rule, markers jump instantly, which users
+ * interpreted as a “jerk”.
+ */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease, left 0.3s ease, top 0.3s ease;
 }
 /* Плавное перемещение маркера на карте */
 .leaflet-marker-icon {
