@@ -145,12 +145,11 @@ body {
     
 .section-img {
   width: 100%;
-  
-    height: auto;
-  max-height: 40vhx;
-  
+  height: auto;
+  max-height: 40vh;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 12px;
 }
+
 
