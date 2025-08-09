@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Админ‑панель - Суши Магазин</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top-bar" style="background:#f8f8f8;padding:12px 16px;border-bottom:1px solid #eeeeee;">
+    <a href="index.html" style="text-decoration:none;color:#d2002d;font-weight:bold;">&larr; На главную</a>
+    <h1 style="display:inline-block;margin-left:16px;font-size:20px;color:#d2002d;">Админ‑панель</h1>
+  </header>
+  <main class="container" style="max-width:800px;margin:20px auto;">
+    <section>
+      <h2 style="color:#d2002d;">Настройки сайта</h2>
+      <form id="admin-settings-form">
+        <label>Телефон для связи:<br>
+          <input type="tel" id="admin-phone" required pattern="[\+\d\s\-()]{8,}">
+        </label><br>
+        <label>WhatsApp номер:<br>
+          <input type="tel" id="admin-whatsapp" required pattern="[\+\d\s\-()]{8,}">
+        </label><br>
+        <label>Название комбо 1:<br>
+          <input type="text" id="admin-combo1">
+        </label><br>
+        <label>Название комбо 2:<br>
+          <input type="text" id="admin-combo2">
+        </label><br>
+        <label>Название комбо 3:<br>
+          <input type="text" id="admin-combo3">
+        </label><br>
+        <label>API‑ключ банка:<br>
+          <input type="text" id="admin-api-key">
+        </label><br>
+        <button type="submit" class="modal-btn" style="margin-top:12px;">Сохранить настройки</button>
+      </form>
+    </section>
+    <section style="margin-top:40px;">
+      <h2 style="color:#d2002d;">История заказов</h2>
+      <ul id="orders-list" style="list-style:none;padding-left:0;"></ul>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
