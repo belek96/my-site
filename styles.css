@@ -143,10 +143,11 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
     
-..section-img {
+.section-img {
   width: 100%;
   
-    height: 250px;
+    height: auto;
+  max-height: 40vhx;
   
   object-fit: cover;
   border-radius: 12px;
