@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const newDescInput = document.getElementById('new-product-desc');
   const newPriceInput = document.getElementById('new-product-price');
   const newImageInput = document.getElementById('new-product-image');
+  // File input for uploading images
+  const newImageFileInput = document.getElementById('new-product-image-file');
+  // SMS key input for messaging service
+  const smsKeyInput = document.getElementById('admin-sms-key');
 
   // Helper: load admin state from localStorage
   function getAdminState() {
@@ -42,33 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
       // initialise with default menu items
       products = [
         // Комбо
-        { id: 'combo1', section: 'combos', name: 'Комбо хит сезона', desc: 'Описание комбо хит сезона.', price: 0, discount: null, image: 'images/combo-placeholder.png' },
-        { id: 'combo2', section: 'combos', name: 'Комбо классика', desc: 'Описание комбо классика.', price: 0, discount: null, image: 'images/combo-placeholder.png' },
-        { id: 'combo3', section: 'combos', name: 'Комбо премиум', desc: 'Описание комбо премиум.', price: 0, discount: null, image: 'images/combo-placeholder.png' },
+        { id: 'combo1', section: 'combos', name: 'Комбо хит сезона', desc: 'Описание комбо хит сезона.', price: 0, discount: null, image: 'combo-placeholder.png' },
+        { id: 'combo2', section: 'combos', name: 'Комбо классика', desc: 'Описание комбо классика.', price: 0, discount: null, image: 'combo-placeholder.png' },
+        { id: 'combo3', section: 'combos', name: 'Комбо премиум', desc: 'Описание комбо премиум.', price: 0, discount: null, image: 'combo-placeholder.png' },
         // Пиццы
-        { id: 'pizza1', section: 'pizzas', name: 'Пепперони', desc: 'Описание пиццы Пепперони.', price: 0, discount: null, image: 'images/pizza-placeholder.png' },
-        { id: 'pizza2', section: 'pizzas', name: 'Маргарита', desc: 'Описание пиццы Маргарита.', price: 0, discount: null, image: 'images/pizza-placeholder.png' },
-        { id: 'pizza3', section: 'pizzas', name: 'Нежный цыпленок', desc: 'Описание пиццы Нежный цыпленок.', price: 0, discount: null, image: 'images/pizza-placeholder.png' },
+        { id: 'pizza1', section: 'pizzas', name: 'Пепперони', desc: 'Описание пиццы Пепперони.', price: 0, discount: null, image: 'pizza-placeholder.png' },
+        { id: 'pizza2', section: 'pizzas', name: 'Маргарита', desc: 'Описание пиццы Маргарита.', price: 0, discount: null, image: 'pizza-placeholder.png' },
+        { id: 'pizza3', section: 'pizzas', name: 'Нежный цыпленок', desc: 'Описание пиццы Нежный цыпленок.', price: 0, discount: null, image: 'pizza-placeholder.png' },
         // Роллы
-        { id: 'roll1', section: 'rolls', name: 'Темпура со сливочным сыром', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll2', section: 'rolls', name: 'Филадельфия с огурцом', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll3', section: 'rolls', name: 'Калифорния с крабом', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll4', section: 'rolls', name: 'С курицей терияки', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll5', section: 'rolls', name: 'Спайси краб', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll6', section: 'rolls', name: 'Темпура с лососем и сыром', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll7', section: 'rolls', name: 'Темпура Спайси лосось', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll8', section: 'rolls', name: 'Филадельфия «Мидори»', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll9', section: 'rolls', name: 'Лосось Абури', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll10', section: 'rolls', name: 'С угрём и лососем', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
-        { id: 'roll11', section: 'rolls', name: 'Темпура угорь', desc: 'Описание позиции.', price: 0, discount: null, image: 'images/roll-placeholder.png' },
+        { id: 'roll1', section: 'rolls', name: 'Темпура со сливочным сыром', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll2', section: 'rolls', name: 'Филадельфия с огурцом', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll3', section: 'rolls', name: 'Калифорния с крабом', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll4', section: 'rolls', name: 'С курицей терияки', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll5', section: 'rolls', name: 'Спайси краб', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll6', section: 'rolls', name: 'Темпура с лососем и сыром', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll7', section: 'rolls', name: 'Темпура Спайси лосось', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll8', section: 'rolls', name: 'Филадельфия «Мидори»', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll9', section: 'rolls', name: 'Лосось Абури', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll10', section: 'rolls', name: 'С угрём и лососем', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
+        { id: 'roll11', section: 'rolls', name: 'Темпура угорь', desc: 'Описание позиции.', price: 0, discount: null, image: 'roll-placeholder.png' },
         // Баскеты
-        { id: 'basket1', section: 'baskets', name: 'Баскет L', desc: 'Описание баскета L.', price: 0, discount: null, image: 'images/basket-placeholder.png' },
-        { id: 'basket2', section: 'baskets', name: 'Баскет M', desc: 'Описание баскета M.', price: 0, discount: null, image: 'images/basket-placeholder.png' },
-        { id: 'basket3', section: 'baskets', name: 'Баскет XL', desc: 'Описание баскета XL.', price: 0, discount: null, image: 'images/basket-placeholder.png' },
+        { id: 'basket1', section: 'baskets', name: 'Баскет L', desc: 'Описание баскета L.', price: 0, discount: null, image: 'basket-placeholder.png' },
+        { id: 'basket2', section: 'baskets', name: 'Баскет M', desc: 'Описание баскета M.', price: 0, discount: null, image: 'basket-placeholder.png' },
+        { id: 'basket3', section: 'baskets', name: 'Баскет XL', desc: 'Описание баскета XL.', price: 0, discount: null, image: 'basket-placeholder.png' },
         // Напитки
-        { id: 'drink1', section: 'drinks', name: 'Кока Кола', desc: '', price: 0, discount: null, image: 'images/drink-placeholder.png' },
-        { id: 'drink2', section: 'drinks', name: 'Фанта', desc: '', price: 0, discount: null, image: 'images/drink-placeholder.png' },
-        { id: 'drink3', section: 'drinks', name: 'Спрайт', desc: '', price: 0, discount: null, image: 'images/drink-placeholder.png' }
+        { id: 'drink1', section: 'drinks', name: 'Кока Кола', desc: '', price: 0, discount: null, image: 'drink-placeholder.png' },
+        { id: 'drink2', section: 'drinks', name: 'Фанта', desc: '', price: 0, discount: null, image: 'drink-placeholder.png' },
+        { id: 'drink3', section: 'drinks', name: 'Спрайт', desc: '', price: 0, discount: null, image: 'drink-placeholder.png' }
       ];
       localStorage.setItem('products', JSON.stringify(products));
     }
@@ -153,21 +157,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = newNameInput.value.trim();
     const desc = newDescInput.value.trim();
     const price = parseFloat(newPriceInput.value);
-    const image = newImageInput.value.trim();
-    if (!name || isNaN(price) || !image) {
+    const imageFile = newImageFileInput && newImageFileInput.files && newImageFileInput.files[0];
+    const imageText = newImageInput.value.trim();
+    if (!name || isNaN(price) || (!imageText && !imageFile)) {
       alert('Пожалуйста, заполните все поля для новой позиции.');
       return;
     }
-    const products = loadProducts();
-    const id = `${section}-${Date.now()}`;
-    products.push({ id, section, name, desc, price, discount: null, image });
-    saveProducts(products);
-    newNameInput.value = '';
-    newDescInput.value = '';
-    newPriceInput.value = '';
-    newImageInput.value = '';
-    alert('Новая позиция добавлена');
-    updateProductList();
+    // helper to finish adding after reading file or using text
+    function finishAdd(imageData) {
+      const products = loadProducts();
+      const id = `${section}-${Date.now()}`;
+      products.push({ id, section, name, desc, price, discount: null, image: imageData });
+      saveProducts(products);
+      newNameInput.value = '';
+      newDescInput.value = '';
+      newPriceInput.value = '';
+      newImageInput.value = '';
+      if (newImageFileInput) newImageFileInput.value = '';
+      alert('Новая позиция добавлена');
+      updateProductList();
+    }
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        finishAdd(ev.target.result);
+      };
+      reader.readAsDataURL(imageFile);
+      return;
+    }
+    // no file selected, use text field
+    finishAdd(imageText);
   });
 
   // Populate the settings form with current values
@@ -178,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const combo2Input = document.getElementById('admin-combo2');
     const combo3Input = document.getElementById('admin-combo3');
     const apiKeyInput = document.getElementById('admin-api-key');
+    const smsKeyInputLocal = document.getElementById('admin-sms-key');
     const settings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
     if (settings.phone) phoneInput.value = settings.phone;
     if (settings.whatsapp) whatsappInput.value = settings.whatsapp;
@@ -187,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
       combo3Input.value = settings.comboNames[2] || '';
     }
     if (settings.apiKey) apiKeyInput.value = settings.apiKey;
+    if (settings.smsKey && smsKeyInputLocal) smsKeyInputLocal.value = settings.smsKey;
   }
 
   function initAdminPanel() {
@@ -202,11 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const whatsappVal = document.getElementById('admin-whatsapp').value.trim();
       const comboVals = [document.getElementById('admin-combo1').value.trim(), document.getElementById('admin-combo2').value.trim(), document.getElementById('admin-combo3').value.trim()];
       const apiKeyVal = document.getElementById('admin-api-key').value.trim();
+      const smsKeyVal = smsKeyInput ? smsKeyInput.value.trim() : '';
       const settings = {
         phone: phoneVal,
         whatsapp: whatsappVal,
         comboNames: comboVals,
-        apiKey: apiKeyVal
+        apiKey: apiKeyVal,
+        smsKey: smsKeyVal
       };
       localStorage.setItem('adminSettings', JSON.stringify(settings));
       alert('Настройки сохранены');
