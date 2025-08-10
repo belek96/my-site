@@ -38,6 +38,43 @@ try {
   console.warn('Could not apply admin settings', e);
 }
 
+// Рендеринг товаров из localStorage (позволяет динамически менять имена, цены, описания и картинки)
+function renderProductsFromStorage() {
+  try {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    document.querySelectorAll('.product-card').forEach(card => {
+      const id = card.getAttribute('data-id');
+      if (!id) return;
+      const prod = products.find(p => p.id === id);
+      if (!prod) return;
+      // update name
+      const title = card.querySelector('h3');
+      if (title) title.textContent = prod.name;
+      // update description
+      const paragraphs = card.querySelectorAll('p');
+      if (paragraphs.length > 0) {
+        paragraphs[0].textContent = prod.desc || '';
+      }
+      // update price
+      const priceElem = card.querySelector('.price');
+      if (priceElem) {
+        if (prod.discount !== null && prod.discount < prod.price) {
+          priceElem.innerHTML = `<span class="old-price">${prod.price.toFixed(2)} сом</span> <span class="discount-price">${prod.discount.toFixed(2)} сом</span>`;
+        } else if (prod.price != null) {
+          priceElem.textContent = `${prod.price.toFixed(2)} сом`;
+        } else {
+          priceElem.textContent = '';
+        }
+      }
+      // update image
+      const img = card.querySelector('img');
+      if (img && prod.image) img.src = prod.image;
+    });
+  } catch (e) {
+    console.warn('Could not render products from storage', e);
+  }
+}
+
 // Cart functionality
 // A simple object to keep track of items and their quantities
 let cart = {};
@@ -299,3 +336,6 @@ orderButton.addEventListener('click', () => {
 
 // Initial render
 renderCart();
+
+// Apply dynamic product information (names, prices, images, descriptions) from admin settings
+renderProductsFromStorage();
