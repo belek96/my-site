@@ -181,13 +181,40 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     // If delivery is scheduled, validate time field pattern (already validated by pattern attr)
+    // Determine payment status based on selection
+    const paymentChoice = document.getElementById('order-payment').value;
+    const paymentStatus = (paymentChoice === 'card') ? 'оплачено' : 'ожидает оплаты';
     // Сохраняем заказ в localStorage для просмотра в админ‑панели
+    let orders;
     try {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      orders.push({ items: cartData, createdAt: new Date().toISOString() });
+      orders = JSON.parse(localStorage.getItem('orders')) || [];
+    } catch (err) {
+      orders = [];
+    }
+    orders.push({ items: cartData, createdAt: new Date().toISOString(), paymentStatus });
+    try {
       localStorage.setItem('orders', JSON.stringify(orders));
     } catch (err) {
       console.warn('Could not save order history', err);
+    }
+    // Отправляем SMS уведомление владельцу, если указан ключ SMS‑сервиса
+    try {
+      const settings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      const smsKey = settings.smsKey || '';
+      const adminPhone = settings.phone || '';
+      if (smsKey && adminPhone) {
+        const itemsList = Object.entries(cartData).map(([title, qty]) => `${title}×${qty}`).join(', ');
+        const buyerPhone = document.getElementById('order-phone').value.trim();
+        const msg = (paymentStatus === 'оплачено')
+          ? `Заказ ${orders.length} — оплачен. Позиции: ${itemsList}.`
+          : `Заказ ${orders.length} ожидает оплату. Позиции: ${itemsList}. Телефон клиента: ${buyerPhone}.`;
+        fetch(`https://sms.api/send?key=${encodeURIComponent(smsKey)}&phone=${encodeURIComponent(adminPhone)}&message=${encodeURIComponent(msg)}`)
+          .catch((error) => {
+            console.warn('SMS send error', error);
+          });
+      }
+    } catch (err) {
+      console.warn('SMS send failed', err);
     }
     // Show success message and clear cart
     const messageDiv = document.getElementById('checkout-message');
